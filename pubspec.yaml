@@ -1,0 +1,48 @@
+name: pwa_installer
+description: >-
+  A Flutter package to facilitate PWA installation on the web. 
+  Provides install guides for iOS/Android, handles in-app browser detection, 
+  and intercepts install prompts for custom UI.
+version: 0.1.0
+homepage: https://github.com/fabapps/pwa_installer
+repository: https://github.com/fabapps/pwa_installer
+issue_tracker: https://github.com/fabapps/pwa_installer/issues
+documentation: https://pub.dev/documentation/pwa_installer/latest/
+funding:
+  - https://buymeacoffee.com/shinob
+
+topics:
+  - pwa
+  - web
+  - install
+  - browser-detection
+
+platforms:
+  web:
+
+environment:
+  sdk: ">=3.3.0 <4.0.0"
+  flutter: ">=3.19.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  cupertino_icons: ^1.0.8
+  web: ^1.0.0
+  url_launcher: ^6.3.0
+  qr_flutter: ^4.1.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^4.0.0
+
+screenshots:
+  - description: "iOS Safari install guide"
+    path: screenshots/ios_install.png
+  - description: "Android Chrome install prompt"
+    path: screenshots/android_install.png
+  - description: "Desktop QR code screen"
+    path: screenshots/desktop_qr.png
+  - description: "In-app browser redirect"
+    path: screenshots/in_app_browser.png
