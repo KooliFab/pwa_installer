@@ -28,9 +28,9 @@ Depends on the browser that open your PWA url:
 
 ## Screenshots
 
-|             iOS Safari              |               Android Chrome                |                Desktop                 |              In-App Browser               |
-| :---------------------------------: | :-----------------------------------------: | :------------------------------------: | :---------------------------------------: |
-| ![iOS](screenshots/ios_install.png) | ![Android](screenshots/android_install.png) | ![Desktop](screenshots/desktop_qr.png) | ![In-App](screenshots/in_app_browser.png) |
+|                                            iOS Safari                                             |                                              Android Chrome                                               |                                               Desktop                                                |                                             In-App Browser                                              |
+| :-----------------------------------------------------------------------------------------------: | :-------------------------------------------------------------------------------------------------------: | :--------------------------------------------------------------------------------------------------: | :-----------------------------------------------------------------------------------------------------: |
+| ![iOS](https://raw.githubusercontent.com/KooliFab/pwa_installer/main/screenshots/ios_install.png) | ![Android](https://raw.githubusercontent.com/KooliFab/pwa_installer/main/screenshots/android_install.png) | ![Desktop](https://raw.githubusercontent.com/KooliFab/pwa_installer/main/screenshots/desktop_qr.png) | ![In-App](https://raw.githubusercontent.com/KooliFab/pwa_installer/main/screenshots/in_app_browser.png) |
 
 ## Installation
 
@@ -38,7 +38,7 @@ Add `pwa_installer` to your `pubspec.yaml`:
 
 ```yaml
 dependencies:
-  pwa_installer: ^0.1.0
+  pwa_installer: ^0.1.1
 ```
 
 ## Setup
@@ -173,12 +173,12 @@ Widget build(BuildContext context) {
 }
 ```
 
-
 ## How Android Install Prompt Works
 
 On Android (Chrome and Chromium-based browsers), the browser can trigger a native install prompt via the `beforeinstallprompt` event. This allows your PWA to be installed directly to the home screen just by tapping a button.
 
 The `beforeinstallprompt` event is fired when:
+
 1. The page meets the installability criteria
 2. The user hasn't dismissed the prompt before
 3. The PWA isn't already installed
@@ -188,9 +188,11 @@ The `beforeinstallprompt` event is fired when:
 For the `beforeinstallprompt` event to fire, your PWA must meet **all** of these criteria:
 
 1. **HTML Setup** in `web/index.html`:
+
    ```html
-   <link rel="manifest" href="manifest.json">
-   <meta name="theme-color" content="#0175C2"> <!-- Optional but recommended -->
+   <link rel="manifest" href="manifest.json" />
+   <meta name="theme-color" content="#0175C2" />
+   <!-- Optional but recommended -->
    ```
 
 2. **HTTPS**: The app must be served over a secure connection (or `localhost` for development).
@@ -226,6 +228,7 @@ Chrome supports a richer installation experience with screenshots and promotiona
 ### iOS users not seeing install guide
 
 - Ensure the user is using Safari. Chrome on iOS does not support PWA installation.
+
 ## Support
 
 If this package helps you, consider supporting its development:

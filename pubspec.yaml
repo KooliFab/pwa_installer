@@ -3,10 +3,10 @@ description: >-
   A Flutter package to facilitate PWA installation on the web. 
   Provides install guides for iOS/Android, handles in-app browser detection, 
   and intercepts install prompts for custom UI.
-version: 0.1.0
-homepage: https://github.com/fabapps/pwa_installer
-repository: https://github.com/fabapps/pwa_installer
-issue_tracker: https://github.com/fabapps/pwa_installer/issues
+version: 0.1.1
+homepage: https://github.com/KooliFab/pwa_installer
+repository: https://github.com/KooliFab/pwa_installer
+issue_tracker: https://github.com/KooliFab/pwa_installer/issues
 documentation: https://pub.dev/documentation/pwa_installer/latest/
 funding:
   - https://buymeacoffee.com/shinob
