@@ -94,7 +94,7 @@ void main() {
     enableBrowserRedirect: true,      // In-app browser redirection
     enableMobileInstallGuide: true,   // display iOS/Android install guide
     enableDesktopInstallGuide: false, // disable QR code view when open url on browser desktop
-    forceInstall: false,              // false let user continue on browser
+    forceInstall: false,              // false allow browser usage
   );
   runApp(const MyApp());
 }

@@ -336,6 +336,12 @@ void main() {
       expect(result, isA<bool>());
     });
 
+    test('shouldShowDesktopInstallGuide with forceInstall returns boolean', () {
+      final result =
+          PlatformDetection.shouldShowDesktopInstallGuide(forceInstall: true);
+      expect(result, isA<bool>());
+    });
+
     test('platform detection is mutually exclusive for mobile types', () {
       final isIos = PlatformDetection.isIos();
       final isAndroid = PlatformDetection.isAndroid();
@@ -533,6 +539,28 @@ void main() {
       expect(PlatformDetection.isMobile(), false);
     });
 
+    test(
+        'shouldShowDesktopInstallGuide with forceInstall true returns true on desktop',
+        () {
+      PlatformDetection.userAgentOverride =
+          'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36';
+
+      expect(
+          PlatformDetection.shouldShowDesktopInstallGuide(forceInstall: true),
+          true);
+    });
+
+    test(
+        'shouldShowDesktopInstallGuide with forceInstall true returns false on mobile',
+        () {
+      PlatformDetection.userAgentOverride =
+          'Mozilla/5.0 (iPhone; CPU iPhone OS 17_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.0 Mobile/15E148 Safari/604.1';
+
+      expect(
+          PlatformDetection.shouldShowDesktopInstallGuide(forceInstall: true),
+          false);
+    });
+
     test('resetUserAgentOverride clears the override', () {
       PlatformDetection.userAgentOverride = 'Instagram test';
       expect(PlatformDetection.detectInAppBrowser().browserName, 'Instagram');
@@ -599,6 +627,12 @@ void main() {
 
     test('shouldShowDesktopInstallGuide returns boolean', () {
       final result = PwaInstall().shouldShowDesktopInstallGuide();
+      expect(result, isA<bool>());
+    });
+
+    test('shouldShowDesktopInstallGuide with forceInstall returns boolean', () {
+      final result =
+          PwaInstall().shouldShowDesktopInstallGuide(forceInstall: true);
       expect(result, isA<bool>());
     });
 
@@ -739,6 +773,10 @@ void main() {
         pwaInstall.shouldShowDesktopInstallGuide(),
         PlatformDetection.shouldShowDesktopInstallGuide(),
       );
+      expect(
+        pwaInstall.shouldShowDesktopInstallGuide(forceInstall: true),
+        PlatformDetection.shouldShowDesktopInstallGuide(forceInstall: true),
+      );
     });
 
     test('PwaInstaller static methods match PwaInstall instance', () {
@@ -762,6 +800,10 @@ void main() {
       expect(
         PwaInstaller.shouldShowDesktopInstallGuide(),
         pwaInstall.shouldShowDesktopInstallGuide(),
+      );
+      expect(
+        PwaInstaller.shouldShowDesktopInstallGuide(forceInstall: true),
+        pwaInstall.shouldShowDesktopInstallGuide(forceInstall: true),
       );
     });
   });
@@ -861,7 +903,19 @@ void main() {
         ),
       );
 
+      // Verify the widget is rendered
       expect(find.byType(MobileInstallGuide), findsOneWidget);
+
+      // Find the dismiss button (text button with 'Continue without installing')
+      final dismissButton = find.text('Continue without installing');
+      expect(dismissButton, findsOneWidget);
+
+      // Tap the button
+      await tester.tap(dismissButton);
+      await tester.pump();
+
+      // Verify callback was called
+      expect(dismissed, true);
     });
 
     testWidgets('renders with light theme', (tester) async {
@@ -1000,9 +1054,9 @@ void main() {
       const customUrl = 'https://myapp.example.com/path?query=1';
 
       await tester.pumpWidget(
-        MaterialApp(
+        const MaterialApp(
           home: DesktopInstallGuide(
-            labels: const PwaInstallerLabels(),
+            labels: PwaInstallerLabels(),
             customUrl: customUrl,
           ),
         ),

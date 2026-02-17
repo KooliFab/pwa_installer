@@ -198,11 +198,10 @@ class PwaInstall {
   ///
   /// Returns true if:
   /// - Running on a desktop browser (not mobile)
-  /// - Not already installed as PWA
   ///
-  /// Use this to redirect desktop users to a screen showing a QR code
-  /// that they can scan with their mobile device.
-  bool shouldShowDesktopInstallGuide() {
-    return PlatformDetection.shouldShowDesktopInstallGuide();
+  /// To prevents installation on desktop, the guide is shown only if [forceInstall] is true.
+
+  bool shouldShowDesktopInstallGuide({bool forceInstall = false}) {
+    return PlatformDetection.shouldShowDesktopInstallGuide(forceInstall: forceInstall);
   }
 }

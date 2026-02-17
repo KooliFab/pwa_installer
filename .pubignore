@@ -1,0 +1,8 @@
+screen.md
+.idea/
+.vscode/
+build/
+coverage/
+*.iml
+test_driver/
+.DS_Store

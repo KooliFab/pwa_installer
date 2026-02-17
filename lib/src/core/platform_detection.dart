@@ -330,10 +330,13 @@ class PlatformDetection {
   ///
   /// Returns true if:
   /// - Running on a desktop browser (not mobile)
-  /// - Not already installed as PWA
-  static bool shouldShowDesktopInstallGuide() {
+  /// - Not already installed as PWA (unless [forceInstall] is true)
+  ///
+  /// When [forceInstall] is true, the desktop guide is shown even for
+  /// installed PWAs, so desktop users are redirected to install on mobile.
+  static bool shouldShowDesktopInstallGuide({bool forceInstall = false}) {
     if (!kIsWeb) return false;
-    if (isInstalledPwa()) return false;
+    if (!forceInstall && isInstalledPwa()) return false;
     return isDesktop();
   }
 }

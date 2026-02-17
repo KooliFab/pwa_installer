@@ -20,7 +20,7 @@ class _PwaInstallerConfig {
     this.enableBrowserRedirect = true,
     this.enableDesktopInstallGuide = true,
     this.enableMobileInstallGuide = true,
-    this.forceInstall = false,
+    this.forceInstall = true,
   });
 }
 
@@ -119,7 +119,7 @@ class PwaInstaller extends StatefulWidget {
   ///
   /// [forceInstall] - Whether to block the app until the user installs the
   /// PWA. When true, the dismiss button is hidden on all install screens.
-  /// Defaults to false.
+  /// Defaults to true.
   ///
   /// [cspNonce] - Optional CSP nonce for apps using strict Content Security Policy.
   /// If your app has a CSP header with `script-src` that doesn't include
@@ -139,7 +139,7 @@ class PwaInstaller extends StatefulWidget {
     bool enableBrowserRedirect = true,
     bool enableDesktopInstallGuide = true,
     bool enableMobileInstallGuide = true,
-    bool forceInstall = false,
+    bool forceInstall = true,
     String? cspNonce,
   }) {
     if (!kIsWeb) return;
@@ -164,9 +164,8 @@ class PwaInstaller extends StatefulWidget {
       BrowserRedirectInjector.inject(nonce: cspNonce);
     }
 
-    PwaInstall().init(
-        enableBrowserRedirect: enableBrowserRedirect,
-        cspNonce: cspNonce);
+    PwaInstall()
+        .init(enableBrowserRedirect: enableBrowserRedirect, cspNonce: cspNonce);
     _initialized = true;
   }
 
@@ -187,8 +186,8 @@ class PwaInstaller extends StatefulWidget {
   static bool shouldShowInstallGuide() => PwaInstall().shouldShowInstallGuide();
 
   /// Checks if desktop install guide should be shown.
-  static bool shouldShowDesktopInstallGuide() =>
-      PwaInstall().shouldShowDesktopInstallGuide();
+  static bool shouldShowDesktopInstallGuide({bool forceInstall = false}) =>
+      PwaInstall().shouldShowDesktopInstallGuide(forceInstall: forceInstall);
 
   /// Checks if the device is mobile.
   static bool isMobile() => PwaInstall().isMobile();
@@ -241,7 +240,7 @@ class _PwaInstallerState extends State<PwaInstaller> {
 
     // 2. Desktop install guide
     if (config.enableDesktopInstallGuide &&
-        PwaInstaller.shouldShowDesktopInstallGuide()) {
+        PwaInstaller.shouldShowDesktopInstallGuide(forceInstall: config.forceInstall)) {
       if (widget.customDesktopScreen != null) {
         return widget.customDesktopScreen!(context, _onDismiss);
       }

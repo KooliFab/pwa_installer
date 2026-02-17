@@ -1,9 +1,6 @@
 name: pwa_installer
-description: >-
-  A Flutter package to facilitate PWA installation on the web. 
-  Provides install guides for iOS/Android, handles in-app browser detection, 
-  and intercepts install prompts for custom UI.
-version: 0.1.1
+description: A Flutter package for PWA installation. Includes install guides, in-app browser detection, and custom install prompt interception.
+version: 0.2.0
 homepage: https://github.com/KooliFab/pwa_installer
 repository: https://github.com/KooliFab/pwa_installer
 issue_tracker: https://github.com/KooliFab/pwa_installer/issues
